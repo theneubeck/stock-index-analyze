@@ -70,6 +70,8 @@ class Balance:
 def parse_input(format="csv"):
     if format == "csv":
         return pd.read_csv(sys.stdin, parse_dates=['Date'], date_format="%b %d, %Y")
+    elif format == "csv-curvo":
+        return pd.read_csv(sys.stdin, parse_dates=['Date'], date_format="%Y-%m")
     return pd.read_json(sys.stdin)
 
 def run(data):
