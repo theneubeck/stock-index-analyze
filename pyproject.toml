@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "index-analyze"
+version = "0.1.0"
+description = ""
+authors = ["Jens Carlén <jens.carlen@offerta.se>"]
+readme = "README.md"
+packages = [{ include = "index_analyze", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+yfinance = "^0.2.35"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+analyze = 'index_analyze.main:main'
