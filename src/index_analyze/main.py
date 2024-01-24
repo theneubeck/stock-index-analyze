@@ -13,7 +13,8 @@ class Point:
     shares: float
 
 @dataclass
-class Balance:
+class Investor:
+    name: str
     invested: float = field(default=0.0)
     shares: float = field(default=0.0)
     transactions: List[Point] = field(default_factory=list)
@@ -55,6 +56,7 @@ class Balance:
 
     def inspect(self):
         return {
+            "name": self.name,
             "current": self.current_value,
             "invested": self.invested,
             "shares": self.shares,
@@ -75,10 +77,10 @@ def parse_input(format="csv"):
     return pd.read_json(sys.stdin)
 
 def run(data):
-    balance = Balance()
+    investor = Investor("stdin")
     for _, row in data.iterrows():
-        balance.buy(row['Date'], row['Close'], 100)
-    return balance
+        investor.buy(row['Date'], row['Close'], 100)
+    return investor
 
 def main():
     result = run(parse_input("json"))
