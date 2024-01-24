@@ -23,7 +23,7 @@ def compound(directory):
 
     results = map(lambda x: x.inspect(), investors)
     #print(json.dumps(sorted(results, key=lambda x: x["total_yearly"])))
-    print(pd.DataFrame(data = results).sort_values(by=["total_yearly"]))
+    print(pd.DataFrame(data = results).set_index("name").sort_values(by=["total_yearly"], ascending=False))
 
 
 if __name__ == "__main__":

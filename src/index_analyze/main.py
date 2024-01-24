@@ -61,11 +61,11 @@ class Investor:
             "invested": self.invested,
             "shares": self.shares,
             "total_percentage": self.total_precentage,
-            "yearly": self.yearly,
-            "years": self.years,
             "last_price": self.transactions[-1].price,
             "total": self.total,
-            "total_yearly": self.total_yearly
+            "total_yearly": self.total_yearly,
+            "years": self.years,
+            "yearly": self.yearly,
         }
 
 
