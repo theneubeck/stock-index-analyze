@@ -20,8 +20,16 @@ def run(directory):
             with open(os.path.join(directory, filename)) as f:
                 contents.append(pd.read_csv(f, parse_dates=["Date"], date_format="%Y-%m").set_index("Date"))
     data = build_analyze_matrix(merge(contents))
-    print(data)
+    print(analyze(data))
 
+def analyze(data):
+    means = pd.DataFrame(columns=["mean"], data=data.mean().transpose())
+    means["median"] = data.median().array
+    means["min"] = data.min().array
+    means["max"] = data.max().array
+    means["yearly"] = means["mean"].apply(lambda x: x**(1/5))
+    means["yearly_median"] = means["median"].apply(lambda x: x**(1/5))
+    return means.sort_values(by=["median"], ascending=False)
 
 def build_analyze_matrix(data, years = 5):
     values_5_years_ago = data.shift(periods=1, freq=pd.DateOffset(years=years))

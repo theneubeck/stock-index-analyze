@@ -51,7 +51,6 @@ def test_analyze_matrix_with_more_rows():
 
     source = pd.DataFrame(data=data).set_index("date")
     result = build_analyze_matrix(source)
-    print(result)
     assert result.shape == (2,3)
     assert result.loc[pd.Timestamp("2020-01-01")].loc["a"] == 1.0
     assert result.loc[pd.Timestamp("2020-01-01")].loc["b"] == 1.0
