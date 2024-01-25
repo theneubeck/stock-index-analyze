@@ -22,6 +22,8 @@ tickers = {
 }
 
 ticker = tickers['Nasdaq Composite']
-data = yf.download(ticker, start="2004-01-01", end="2024-01-20", interval="1mo")
+data = yf.download(ticker, start="2023-01-01", end="2024-01-20", interval="1mo")
+print(data.reset_index()[["Date", "Close"]].to_csv())
 print(data.reset_index().to_json())
 
+print(data.reset_index()[["Date", "Close"]].to_string(formatters={"Date": lambda x: x.strftime('%Y-%m')}))
