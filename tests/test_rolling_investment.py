@@ -40,6 +40,35 @@ def test_analyze_matrix():
     assert result.loc[pd.Timestamp("2015-01-01")].loc["c"] == 3.0
 
 
+def test_analyze_matrix_other_values():
+    data = [
+        {"date": pd.Timestamp("2010-01-01"), "a": 1.0, "b": 2.0, "c": 3.0},
+        {"date": pd.Timestamp("2015-01-01"), "a": 1.0, "b": 2.0, "c": 3.0}
+    ]
+
+    source = pd.DataFrame(data=data).set_index("date")
+    result = build_analyze_matrix(source)
+
+    assert result.shape == (1,3)
+    assert result.loc[pd.Timestamp("2015-01-01")].loc["a"] == 1.0
+    assert result.loc[pd.Timestamp("2015-01-01")].loc["b"] == 1.0
+    assert result.loc[pd.Timestamp("2015-01-01")].loc["c"] == 1.0
+
+
+def test_analyze_matrix_other_values():
+    data = [
+        {"date": pd.Timestamp("2010-01-01"), "a": 1.0, "b": 3.0, "c": 2.0},
+        {"date": pd.Timestamp("2015-01-01"), "a": 2.0, "b": 9.0, "c": 1.0}
+    ]
+
+    source = pd.DataFrame(data=data).set_index("date")
+    result = build_analyze_matrix(source)
+
+    assert result.shape == (1,3)
+    assert result.loc[pd.Timestamp("2015-01-01")].loc["a"] == 2.0
+    assert result.loc[pd.Timestamp("2015-01-01")].loc["b"] == 3.0
+    assert result.loc[pd.Timestamp("2015-01-01")].loc["c"] == 0.5
+
 def test_analyze_matrix_with_more_rows():
     data = [
         {"date": pd.Timestamp("2010-01-01"), "a": 1.0, "b": 1.0, "c": 1.0},
