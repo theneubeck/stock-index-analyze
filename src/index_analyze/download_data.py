@@ -2,27 +2,25 @@ import yfinance as yf
 import pandas as pd
 
 tickers = {
-    'Global': '^GSPC',          # S&P 500 as a global index (you can change this to another global index)
-    "Dow Jones Industrial Average": "^DJI",
-    'Nasdaq 100': '^NDX',
+    # 'Global': '^GSPC',          # S&P 500 as a global index (you can change this to another global index)
+    # "Dow Jones Industrial Average": "^DJI",
+    # 'Nasdaq 100': '^NDX',
     'Nasdaq Composite': '^IXIC',
-    'Dow Jones': '^DJI',
-    'S&P 500': '^GSPC',
-    'FTSE 100': '^FTSE',         # UK
+    # 'Dow Jones': '^DJI',
+    # 'S&P 500': '^GSPC',
+    # 'FTSE 100': '^FTSE',         # UK
     'DAX': '^GDAXI',             # Germany
     'CAC 40': '^FCHI',           # France
-    'NIKKEI 225': '^N225',       # Japan
+    # 'NIKKEI 225': '^N225',       # Japan
     'Hang Seng': '^HSI',         # Hong Kong
     'Shanghai Composite': '000001.SS',  # China
-    'Sensex': '^BSESN',          # India
+    # 'Sensex': '^BSESN',          # India
     'ASX 200': '^AXJO',          # Australia
     'Brazil Bovespa': '^BVSP',   # Brazil
-    'MSCI WORLD': '^990100-USD-STRD',
-    "OMX 30" : '^OMX',
     "Vanguard Small Cap Index Adm": 'VSMAX',
 
     # OMX and Nordic Country Indices
-    "OMX Stockholm 30 (Sweden)": "^OMX",
+    # "OMX Stockholm 30 (Sweden)": "^OMX",
     "OMX Helsinki 25 (Finland)": "^OMXH25",
     "OMX Copenhagen 20 (Denmark)": "^OMXC20",
     "OMX Iceland 8 (Iceland)": "OMXI8",
@@ -30,7 +28,7 @@ tickers = {
     "OMX Oslo 20 (Norway)": "^OSEAX",  # Note: Oslo Børs is not part of Nasdaq Nordic.
 
     # Commodities
-    "Gold": "GC=F",
+    # "Gold": "GC=F",
     "Silver": "SI=F",
     "Crude Oil": "CL=F",
     "Brent Oil": "BZ=F",
@@ -38,12 +36,12 @@ tickers = {
     "Copper": "HG=F",
 
     # Currency Pairs
-    "EUR/USD": "EURUSD=X",
-    "USD/JPY": "USDJPY=X",
-    "GBP/USD": "GBPUSD=X",
-    "USD/CHF": "USDCHF=X",
-    "AUD/USD": "AUDUSD=X",
-    "USD/CAD": "USDCAD=X",
+    # "EUR/USD": "EURUSD=X",
+    # "USD/JPY": "USDJPY=X",
+    # "GBP/USD": "GBPUSD=X",
+    # "USD/CHF": "USDCHF=X",
+    # "AUD/USD": "AUDUSD=X",
+    # "USD/CAD": "USDCAD=X",
 
     # Interest Rates and Bonds
     "US 10-Year Treasury Yield": "^TNX",
@@ -63,6 +61,10 @@ tickers = {
 def download(name, ticker):
     data = yf.download(ticker, period='max', interval='1mo')
     # data = yf.download(ticker, start="2023-01-01", end="2024-01-20", interval="1mo")
-    print(data.rename(columns={"Close": name}).to_csv(date_format="%Y-%m", columns=[name]))
+    filename = f"data/{name.lower().replace(' ', '-').replace('(', '').replace(')', '')}.csv"
+    data = data.rename(columns={"Close": name}).to_csv(filename, date_format="%Y-%m", columns=[name])
+    return filename, data
 
-download("OMX", "^OMX")
+for name, ticker in tickers.items():
+    n, d = download(name, ticker)
+    print(n)
