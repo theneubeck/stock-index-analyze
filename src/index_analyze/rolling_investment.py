@@ -20,7 +20,7 @@ def run(directory):
             with open(os.path.join(directory, filename)) as f:
                 contents.append(pd.read_csv(f, parse_dates=["Date"], date_format="%Y-%m").set_index("Date"))
     data = build_analyze_matrix(merge(contents))
-    print(analyze(data))
+    return analyze(data)
 
 def analyze(data):
     means = pd.DataFrame(columns=["mean"], data=data.mean().transpose())
@@ -38,4 +38,4 @@ def build_analyze_matrix(data, years = 5):
 
 
 if __name__ == "__main__":
-    run(Path("./data/monthly"))
+    print(run(Path("./data/monthly")))
