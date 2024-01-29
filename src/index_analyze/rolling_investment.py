@@ -1,28 +1,14 @@
-import os
 from pathlib import Path
-from datetime import datetime
 import pandas as pd
-
-
-def merge(contents):
-    data = pd.DataFrame()
-    for c in contents:
-        data = pd.merge(data, c, how="outer", left_index=True, right_index=True)
-
-    return data
+from index_analyze.read_data import load_directory
 
 
 def run(directory):
-    contents = []
     result = pd.DataFrame()
-
-    for filename in os.listdir(directory):
-        if filename.endswith(".csv"):
-            with open(os.path.join(directory, filename)) as f:
-                contents.append(pd.read_csv(f, parse_dates=["Date"], date_format="%Y-%m").set_index("Date"))
+    raw_data = load_directory(directory)
 
     for years in range(1,11):
-        data = build_analyze_matrix(merge(contents), years)
+        data = build_analyze_matrix(raw_data, years)
         result = pd.concat([result, analyze(data, years)])
     return result.sort_values(by=["median"], ascending=False).dropna()
 
