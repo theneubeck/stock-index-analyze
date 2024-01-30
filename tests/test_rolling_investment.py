@@ -1,7 +1,7 @@
 import pandas as pd
 
-from index_analyze.rolling_investment import build_analyze_matrix, merge
-
+from index_analyze.rolling_investment import build_analyze_matrix
+from index_analyze.read_data import merge
 
 def test_merge():
     a = pd.DataFrame(data=[{"a": 1}])
