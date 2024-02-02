@@ -68,3 +68,4 @@ def download(name, ticker):
 for name, ticker in tickers.items():
     n, d = download(name, ticker)
     print(n)
+
