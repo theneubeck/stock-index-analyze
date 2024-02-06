@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from index_analyze.read_data import load_directory
-from index_analyze.analyze import analyze_result
+from index_analyze.lib.read_data import load_directory
+from index_analyze.lib.analyze import analyze_result
 
 def run(directory):
     result = pd.DataFrame()
@@ -18,7 +18,7 @@ def run(directory):
 
 def build_analyze_matrix(data, years=5):
     shares = sum_shares(calc_shares(data), years)
-    result = shares.div(12*years+1).mul(data)
+    result = shares.mul(data)
     return result.dropna(how="all")
 
 
@@ -26,7 +26,7 @@ def calc_shares(prices):
     return 1 / prices
 
 def sum_shares(shares, years=5):
-    return shares.rolling(f"{366 * years}d", min_periods=12*years+1).sum()
+    return shares.rolling(f"{366 * years}d", min_periods=12*years+1).mean()
 
 
 if __name__ == "__main__":
