@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 
 import pandas as pd
 
@@ -32,4 +33,11 @@ def mean_shares(shares, years=5, min_periods=None):
 
 if __name__ == "__main__":
     with pd.option_context("display.max_rows", None):
+        if len(sys.argv) > 1 and sys.argv[1] == "-h":
+            print("In a buy every month for 5 years scenario:")
+            print("mean - mean of times money value")
+            print("median - median of times money value")
+            print("min - worst of times money value")
+            print("max - best of times money value")
+            print()
         print(run(Path("./data/monthly")))
