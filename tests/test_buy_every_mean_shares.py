@@ -1,8 +1,7 @@
-import pytest
 
 import pandas as pd
 
-from index_analyze.buy_every import calc_shares, mean_shares, build_analyze_matrix
+from index_analyze.buy_every import calc_shares, mean_shares
 
 def test_shares_matrix():
     data = [
