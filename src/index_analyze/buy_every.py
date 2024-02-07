@@ -17,7 +17,7 @@ def run(directory):
 
 
 def build_analyze_matrix(data, years=5):
-    shares = mean_shares(calc_shares(data, years=5), years)
+    shares = mean_shares(calc_shares(data), years)
     result = shares.mul(data)
     return result.dropna(how="all")
 

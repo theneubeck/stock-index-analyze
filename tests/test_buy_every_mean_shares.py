@@ -67,7 +67,7 @@ def test_mean_shares_multiple_spans():
     ]).set_index("date")
     assert result.equals(excepted)
 
-def test_sum_shares_with_inbetweens_multiple_spans():
+def test_mean_shares_with_inbetweens_multiple_spans():
     source = pd.DataFrame(data=[
         {"date": pd.Timestamp("2005-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
         {"date": pd.Timestamp("2007-03-01"), "a": 1.0, "b": 2.0, "c": 2.0},
@@ -86,27 +86,4 @@ def test_sum_shares_with_inbetweens_multiple_spans():
         {"date": pd.Timestamp("2015-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
         {"date": pd.Timestamp("2020-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
     ]).set_index("date")
-    assert result.equals(excepted)
-
-@pytest.mark.skip
-def test_build_analyze_matrix():
-    excepted = pd.DataFrame(data=[
-        {"date": pd.Timestamp("2005-01-01"), "a": 1.0, "b": 1.0, "c": 1.0},
-        {"date": pd.Timestamp("2007-03-01"), "a": 2.0, "b": 4.0, "c": 4.0},
-        {"date": pd.Timestamp("2010-01-01"), "a": 2.0, "b": 4.0, "c": 4.0},
-        {"date": pd.Timestamp("2012-02-28"), "a": 2.0, "b": 4.0, "c": 4.0},
-        {"date": pd.Timestamp("2015-01-01"), "a": 2.0, "b": 4.0, "c": 4.0},
-        {"date": pd.Timestamp("2020-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
-    ]).set_index("date")
-
-    source = pd.DataFrame(data=[
-        {"date": pd.Timestamp("2005-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
-        {"date": pd.Timestamp("2007-03-01"), "a": 1.0, "b": 2.0, "c": 2.0},
-        {"date": pd.Timestamp("2010-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
-        {"date": pd.Timestamp("2012-02-28"), "a": 1.0, "b": 2.0, "c": 2.0},
-        {"date": pd.Timestamp("2015-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
-        {"date": pd.Timestamp("2020-01-01"), "a": 1.0, "b": 2.0, "c": 2.0},
-    ]).set_index("date")
-
-    result = build_analyze_matrix(source)
     assert result.equals(excepted)
