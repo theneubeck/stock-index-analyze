@@ -17,7 +17,7 @@ def run(directory):
 
 
 def build_analyze_matrix(data, years=5):
-    shares = sum_shares(calc_shares(data), years)
+    shares = mean_shares(calc_shares(data, years=5), years)
     result = shares.mul(data)
     return result.dropna(how="all")
 
@@ -25,8 +25,9 @@ def build_analyze_matrix(data, years=5):
 def calc_shares(prices):
     return 1 / prices
 
-def sum_shares(shares, years=5):
-    return shares.rolling(f"{366 * years}d", min_periods=12*years+1).mean()
+def mean_shares(shares, years=5, min_periods=None):
+    min_periods = min_periods or 12*years+1
+    return shares.rolling(f"{366 * years}d", min_periods=min_periods).mean()
 
 
 if __name__ == "__main__":

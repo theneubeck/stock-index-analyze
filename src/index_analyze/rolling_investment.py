@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from index_analyze.read_data import load_directory
-from index_analyze.analyze import analyze_result
+from index_analyze.lib.read_data import load_directory
+from index_analyze.lib.analyze import analyze_result
 
 def run(directory):
     result = pd.DataFrame()
