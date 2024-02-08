@@ -15,6 +15,7 @@ yfinance = "^0.2.35"
 pytest = "^7.4.4"
 ipykernel = "^6.29.0"
 jupyter = "^1.0.0"
+matplotlib = "^3.8.2"
 
 [build-system]
 requires = ["poetry-core"]
