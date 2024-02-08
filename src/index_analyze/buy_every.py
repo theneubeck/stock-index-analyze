@@ -13,7 +13,7 @@ def run(directory):
     years = 5
 
     data = build_analyze_matrix(raw_data, years)
-    result = analyze_result(data, years)
+    result = analyze_result(data, years, raw_data)
     return result.sort_values(by=["median"], ascending=False).dropna()
 
 

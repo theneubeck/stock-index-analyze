@@ -1,10 +1,10 @@
 import math
 import pandas as pd
 
-def analyze_result(data, years):
+def analyze_result(data, years, raw_data):
     analyze = pd.DataFrame(columns=["name"], data=data.columns).set_index("name")
     analyze["years"] = years
-    analyze["years_of_data"] = data.apply(calculate_date_difference)
+    analyze["years_of_data"] = raw_data.apply(calculate_date_difference)
 
     analyze["mean"] = data.mean().array
     analyze["median"] = data.median().array
