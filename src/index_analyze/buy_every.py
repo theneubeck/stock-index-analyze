@@ -1,13 +1,13 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pandas as pd
 
-from index_analyze.lib.read_data import load_directory
 from index_analyze.lib.analyze import analyze_result
+from index_analyze.lib.read_data import load_directory
+
 
 def run(directory):
-    result = pd.DataFrame()
     raw_data = load_directory(directory)
 
     years = 5
@@ -26,8 +26,9 @@ def build_analyze_matrix(data, years=5):
 def calc_shares(prices):
     return 1 / prices
 
+
 def mean_shares(shares, years=5, min_periods=None):
-    min_periods = min_periods or 12*years+1
+    min_periods = min_periods or 12 * years + 1
     return shares.rolling(f"{366 * years}d", min_periods=min_periods).mean()
 
 
@@ -39,5 +40,7 @@ if __name__ == "__main__":
             print("median - median of times money value")
             print("min - worst of times money value")
             print("max - best of times money value")
+            print("years - how many years we buy every month")
+            print("years_of_data - how much data we base the report on")
             print()
         print(run(Path("./data/monthly")))
