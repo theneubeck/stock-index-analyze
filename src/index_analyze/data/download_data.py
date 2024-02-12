@@ -48,7 +48,15 @@ tickers = {
     # "US 30-Year Treasury Yield": "^TYX",
     # "US 2-Year Treasury Yield": "^IRX",
     # "Euro Bund": "^BUND",
-    # "UK Gilt 10-Year Yield": "^GSPG10YR"
+    # "UK Gilt 10-Year Yield": "^GSPG10YR",
+    # 'S&P 500 ETF': "SPY",
+    # "SPDR Dow Jones Industrial Average ETF": "DIA",
+    # "Invesco NDX ETF": "QQQ",
+    # "Vanguard Total Stock Market ETF": "VTI",
+    # "iShares Russell 2000 ETF": "IWM",
+    # "Vanguard FTSE Developed Markets ETF": "VEA",
+    # "iShares MSCI World ETF": "URTH",
+    # "iShares MSCI ACWI ETF":"ACWI",
 }
 
 # ticker = tickers['Nasdaq Composite']
